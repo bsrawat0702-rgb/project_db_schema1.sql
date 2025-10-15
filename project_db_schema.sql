@@ -1,10 +1,13 @@
--- 1️⃣ Create database if not exists
-CREATE DATABASE IF NOT EXISTS project_db_schema;
+-- ===========================
+-- Initial DB Schema + Sample Data
+-- Filename: project_db_schema1.sql
+-- ===========================
 
--- 2️⃣ Use the database
-USE project_db_schema;
+-- 1️⃣ Create Database
+CREATE DATABASE IF NOT EXISTS project_db_schema1;
+USE project_db_schema1;
 
--- 3️⃣ Create Users table
+-- 2️⃣ Users Table
 CREATE TABLE IF NOT EXISTS Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -13,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 4️⃣ Create Products table
+-- 3️⃣ Products Table
 CREATE TABLE IF NOT EXISTS Products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -22,7 +25,7 @@ CREATE TABLE IF NOT EXISTS Products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 5️⃣ Create Orders table
+-- 4️⃣ Orders Table
 CREATE TABLE IF NOT EXISTS Orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -31,7 +34,7 @@ CREATE TABLE IF NOT EXISTS Orders (
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
--- 6️⃣ Create Order_Items table
+-- 5️⃣ Order_Items Table
 CREATE TABLE IF NOT EXISTS Order_Items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
@@ -41,3 +44,40 @@ CREATE TABLE IF NOT EXISTS Order_Items (
     FOREIGN KEY (order_id) REFERENCES Orders(id),
     FOREIGN KEY (product_id) REFERENCES Products(id)
 );
+
+-- ===========================
+-- 6️⃣ Sample Data
+-- ===========================
+INSERT INTO Users (name, email, password) VALUES
+('Bhawani Singh', 'bhawani@example.com', 'pass123'),
+('Aman Kumar', 'aman@example.com', 'pass123'),
+('Sourabh Verma', 'sourabh@example.com', 'pass123');
+
+INSERT INTO Products (name, price, stock) VALUES
+('Laptop', 45000.00, 10),
+('Mobile Phone', 15000.00, 25),
+('Headphones', 2000.00, 50);
+
+INSERT INTO Orders (user_id, total_amount) VALUES
+(1, 47000.00),
+(2, 15000.00);
+
+INSERT INTO Order_Items (order_id, product_id, quantity, price) VALUES
+(1, 1, 1, 45000.00),
+(1, 3, 1, 2000.00),
+(2, 2, 1, 15000.00);
+
+-- ===========================
+-- 7️⃣ Optional: Check Data
+-- ===========================
+SHOW DATABASES;
+SHOW TABLES;
+DESCRIBE Users;
+DESCRIBE Products;
+DESCRIBE Orders;
+DESCRIBE Order_Items;
+
+SELECT * FROM Users;
+SELECT * FROM Products;
+SELECT * FROM Orders;
+SELECT * FROM Order_Items;
