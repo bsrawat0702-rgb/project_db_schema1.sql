@@ -44,6 +44,14 @@ CREATE TABLE IF NOT EXISTS Order_Items (
     FOREIGN KEY (order_id) REFERENCES Orders(id),
     FOREIGN KEY (product_id) REFERENCES Products(id)
 );
+-- 8️⃣ Client Table
+CREATE TABLE IF NOT EXISTS Client (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(15),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 -- ===========================
 -- 6️⃣ Sample Data
@@ -67,6 +75,10 @@ INSERT INTO Order_Items (order_id, product_id, quantity, price) VALUES
 (1, 3, 1, 2000.00),
 (2, 2, 1, 15000.00);
 
+INSERT INTO Client (name, email, phone) VALUES
+('Aman', 'aman@example.com', '9876543210'),
+('Shreenath', 'shreenath@example.com', '9123456780');
+
 -- ===========================
 -- 7️⃣ Optional: Check Data
 -- ===========================
@@ -76,8 +88,10 @@ DESCRIBE Users;
 DESCRIBE Products;
 DESCRIBE Orders;
 DESCRIBE Order_Items;
+DESCRIBE Client;
 
 SELECT * FROM Users;
 SELECT * FROM Products;
 SELECT * FROM Orders;
 SELECT * FROM Order_Items;
+SELECT * FROM Client;
